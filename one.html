@@ -1611,34 +1611,7 @@
       });
     }
 
-    // Add accent gems to the necklace
-    function createJewelry() {
-      const ringBand = document.querySelector('.ring-band');
-      const numberOfGems = 32; // Accent gems along the necklace chain
-      
-      for (let i = 0; i < numberOfGems; i++) {
-        const angle = (360 / numberOfGems) * i;
-        const gem = document.createElement('div');
-        gem.className = 'accent-gem';
-        gem.style.position = 'absolute';
-        gem.style.top = '50%';
-        gem.style.left = '50%';
-        
-        // Calculate elliptical position for necklace shape
-        const radiusX = 190;
-        const radiusY = 140;
-        const radians = (angle * Math.PI) / 180;
-        const x = Math.cos(radians) * radiusX;
-        const y = Math.sin(radians) * radiusY;
-        
-        gem.style.transform = `translate(calc(-50% + ${x}px), calc(-50% + ${y}px))`;
-        gem.style.animationDelay = `${i * 0.04}s`;
-        ringBand.appendChild(gem);
-      }
-    }
-
     // Initialize
-    createJewelry();
     renderProducts();
     renderPagination();
   </script>
