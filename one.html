@@ -1,0 +1,1646 @@
+<!doctype html>
+<html lang="en">
+ <head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Luxury Jewelry Showcase</title>
+  <script src="/_sdk/element_sdk.js"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;500;600;700&amp;family=Montserrat:wght@200;300;400;500;600;700&amp;display=swap" rel="stylesheet">
+  <style>
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      font-family: 'Montserrat', sans-serif;
+      background: #ffffff;
+      color: #2d2d2d;
+      overflow-x: hidden;
+    }
+
+    *, *::before, *::after {
+      box-sizing: border-box;
+    }
+
+    /* Custom Scrollbar */
+    ::-webkit-scrollbar {
+      width: 10px;
+    }
+
+    ::-webkit-scrollbar-track {
+      background: #1a1a1a;
+    }
+
+    ::-webkit-scrollbar-thumb {
+      background: linear-gradient(180deg, #ff69b4, #ffb6d9);
+      border-radius: 5px;
+    }
+
+    ::-webkit-scrollbar-thumb:hover {
+      background: linear-gradient(180deg, #ffb6d9, #ff69b4);
+      box-shadow: 0 0 10px rgba(255, 105, 180, 0.5);
+    }
+
+    /* Animated Background */
+    .bg-gradient {
+      position: fixed;
+      width: 100%;
+      height: 100%;
+      top: 0;
+      left: 0;
+      z-index: -1;
+      background: radial-gradient(circle at 20% 50%, rgba(255, 105, 180, 0.15) 0%, transparent 50%),
+                  radial-gradient(circle at 80% 80%, rgba(255, 182, 217, 0.12) 0%, transparent 50%),
+                  linear-gradient(135deg, #ffffff 0%, #ffe6f0 100%);
+    }
+
+    .bg-pattern {
+      position: fixed;
+      width: 100%;
+      height: 100%;
+      top: 0;
+      left: 0;
+      z-index: -1;
+      opacity: 0.03;
+      background-image: 
+        repeating-linear-gradient(45deg, transparent, transparent 35px, rgba(255, 105, 180, 0.1) 35px, rgba(255, 105, 180, 0.1) 70px);
+    }
+
+    /* Header */
+    header {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      background: rgba(255, 255, 255, 0.97);
+      backdrop-filter: blur(25px);
+      padding: 1.8rem 4rem;
+      z-index: 1000;
+      border-bottom: 1px solid rgba(255, 105, 180, 0.3);
+      transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+      box-shadow: 0 2px 20px rgba(255, 105, 180, 0.15);
+    }
+
+    header::after {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 0;
+      height: 1px;
+      background: linear-gradient(90deg, transparent, #ff69b4, transparent);
+      transition: width 0.5s ease;
+    }
+
+    header.scrolled {
+      padding: 1.2rem 4rem;
+      box-shadow: 0 4px 40px rgba(0, 0, 0, 0.5);
+      border-bottom-color: rgba(255, 105, 180, 0.5);
+    }
+
+    header.scrolled::after {
+      width: 300px;
+    }
+
+    nav {
+      max-width: 1600px;
+      margin: 0 auto;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .logo {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 2.2rem;
+      font-weight: 600;
+      letter-spacing: 4px;
+      background: linear-gradient(135deg, #ff69b4, #ffb6d9, #ff69b4);
+      background-size: 200% auto;
+      -webkit-background-clip: text;
+      background-clip: text;
+      -webkit-text-fill-color: transparent;
+      text-decoration: none;
+      position: relative;
+      transition: all 0.4s ease;
+      animation: shimmer 8s ease-in-out infinite;
+      filter: drop-shadow(0 2px 8px rgba(255, 105, 180, 0.3));
+    }
+
+    .logo:hover {
+      transform: scale(1.05);
+      filter: drop-shadow(0 4px 15px rgba(255, 105, 180, 0.5));
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 3.5rem;
+      list-style: none;
+      margin: 0;
+      padding: 0;
+    }
+
+    .nav-links a {
+      color: #2d2d2d;
+      text-decoration: none;
+      font-size: 0.85rem;
+      font-weight: 500;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      position: relative;
+      transition: all 0.3s ease;
+      padding: 0.5rem 0;
+    }
+
+    .nav-links a::before {
+      content: '';
+      position: absolute;
+      top: 50%;
+      left: -10px;
+      transform: translateY(-50%);
+      width: 4px;
+      height: 0;
+      background: #ff69b4;
+      transition: height 0.3s ease;
+    }
+
+    .nav-links a::after {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      width: 0;
+      height: 2px;
+      background: linear-gradient(90deg, #ff69b4, #ffb6d9);
+      transition: width 0.4s ease;
+      box-shadow: 0 0 10px rgba(255, 105, 180, 0.5);
+    }
+
+    .nav-links a:hover {
+      color: #ffb6d9;
+      transform: translateY(-2px);
+    }
+
+    .nav-links a:hover::before {
+      height: 100%;
+    }
+
+    .nav-links a:hover::after {
+      width: 100%;
+    }
+
+    /* Hero Section */
+    .hero {
+      position: relative;
+      width: 100%;
+      min-height: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 140px 2rem 100px;
+      overflow: hidden;
+    }
+
+    .hero-video {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      z-index: 1;
+    }
+
+    /* Animated gradient overlay */
+    .hero::before {
+      content: '';
+      position: absolute;
+      width: 200%;
+      height: 200%;
+      top: -50%;
+      left: -50%;
+      background: 
+        radial-gradient(circle at 30% 40%, rgba(255, 20, 147, 0.15), transparent 40%),
+        radial-gradient(circle at 70% 60%, rgba(255, 105, 180, 0.2), transparent 50%),
+        radial-gradient(circle at 50% 80%, rgba(255, 182, 217, 0.15), transparent 45%);
+      animation: heroGradientMove 15s ease-in-out infinite;
+      opacity: 0.8;
+    }
+
+    @keyframes heroGradientMove {
+      0%, 100% { transform: translate(0, 0) rotate(0deg); }
+      50% { transform: translate(-10%, -10%) rotate(180deg); }
+    }
+
+    /* Floating sparkles */
+    .hero::after {
+      content: '';
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      background-image: 
+        radial-gradient(circle, rgba(255, 255, 255, 0.8) 1px, transparent 1px),
+        radial-gradient(circle, rgba(255, 182, 217, 0.6) 1px, transparent 1px),
+        radial-gradient(circle, rgba(255, 105, 180, 0.7) 2px, transparent 2px);
+      background-size: 200px 200px, 300px 300px, 250px 250px;
+      background-position: 0 0, 40px 60px, 130px 270px;
+      animation: sparkleFloat 25s linear infinite;
+      opacity: 0.4;
+    }
+
+    @keyframes sparkleFloat {
+      0% { background-position: 0 0, 40px 60px, 130px 270px; }
+      100% { background-position: 200px 200px, 240px 260px, 330px 470px; }
+    }
+
+
+
+    .hero-content {
+      position: relative;
+      z-index: 10;
+      text-align: center;
+      max-width: 1000px;
+      animation: fadeInUp 1.2s ease-out;
+      background: rgba(0, 0, 0, 0.3);
+      padding: 3rem;
+      border-radius: 8px;
+      backdrop-filter: blur(5px);
+    }
+
+    @keyframes fadeInUp {
+      from {
+        opacity: 0;
+        transform: translateY(50px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    .hero-title {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 7rem;
+      font-weight: 300;
+      margin-bottom: 2rem;
+      line-height: 1.15;
+      letter-spacing: 4px;
+      background: linear-gradient(135deg, 
+        #ffffff 0%, 
+        #ffb6d9 20%,
+        #ff69b4 40%, 
+        #ff1493 50%,
+        #ff69b4 60%,
+        #ffb6d9 80%,
+        #ffffff 100%);
+      background-size: 300% auto;
+      -webkit-background-clip: text;
+      background-clip: text;
+      -webkit-text-fill-color: transparent;
+      animation: shimmer 6s ease-in-out infinite, titleGlow 3s ease-in-out infinite;
+      filter: drop-shadow(0 0 40px rgba(255, 105, 180, 0.6)) drop-shadow(0 5px 15px rgba(0, 0, 0, 0.5));
+      position: relative;
+      text-shadow: 0 0 80px rgba(255, 105, 180, 0.5);
+    }
+
+    @keyframes shimmer {
+      0%, 100% { background-position: 0% center; }
+      50% { background-position: 100% center; }
+    }
+
+    @keyframes titleGlow {
+      0%, 100% { 
+        filter: drop-shadow(0 0 40px rgba(255, 105, 180, 0.6)) drop-shadow(0 5px 15px rgba(0, 0, 0, 0.5)); 
+      }
+      50% { 
+        filter: drop-shadow(0 0 60px rgba(255, 105, 180, 0.9)) drop-shadow(0 5px 20px rgba(0, 0, 0, 0.7)); 
+      }
+    }
+
+    .hero-title::after {
+      content: '';
+      position: absolute;
+      bottom: -25px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 180px;
+      height: 3px;
+      background: linear-gradient(90deg, transparent, #ff69b4 20%, #ff1493 50%, #ff69b4 80%, transparent);
+      box-shadow: 0 0 20px rgba(255, 105, 180, 0.8);
+      animation: underlineGlow 3s ease-in-out infinite;
+    }
+
+    @keyframes underlineGlow {
+      0%, 100% { box-shadow: 0 0 20px rgba(255, 105, 180, 0.8); }
+      50% { box-shadow: 0 0 40px rgba(255, 105, 180, 1); }
+    }
+
+    .hero-subtitle {
+      font-size: 1.4rem;
+      font-weight: 300;
+      color: #8b6f47;
+      margin-bottom: 4rem;
+      letter-spacing: 3px;
+      animation: fadeInUp 1.2s ease-out 0.3s both;
+      text-shadow: 0 2px 20px rgba(139, 111, 71, 0.3);
+      line-height: 1.6;
+    }
+
+    .cta-button {
+      display: inline-block;
+      padding: 1.8rem 5.5rem;
+      background: linear-gradient(135deg, #ff1493, #ff69b4, #ff1493);
+      background-size: 200% auto;
+      color: #ffffff;
+      text-decoration: none;
+      font-size: 1.05rem;
+      font-weight: 700;
+      letter-spacing: 4px;
+      text-transform: uppercase;
+      border-radius: 0;
+      transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+      position: relative;
+      overflow: hidden;
+      animation: fadeInUp 1.2s ease-out 0.6s both, buttonPulse 3s ease-in-out infinite;
+      box-shadow: 0 15px 50px rgba(255, 20, 147, 0.4),
+                  0 5px 20px rgba(0, 0, 0, 0.3),
+                  inset 0 1px 0 rgba(255, 255, 255, 0.2);
+      border: 2px solid rgba(255, 255, 255, 0.2);
+      text-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+    }
+
+    @keyframes buttonPulse {
+      0%, 100% { 
+        box-shadow: 0 15px 50px rgba(255, 20, 147, 0.4),
+                    0 5px 20px rgba(0, 0, 0, 0.3),
+                    inset 0 1px 0 rgba(255, 255, 255, 0.2);
+      }
+      50% { 
+        box-shadow: 0 15px 60px rgba(255, 20, 147, 0.6),
+                    0 5px 25px rgba(0, 0, 0, 0.4),
+                    inset 0 1px 0 rgba(255, 255, 255, 0.3);
+      }
+    }
+
+    .cta-button::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: -100%;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.6), transparent);
+      transition: left 0.5s ease;
+    }
+
+    .cta-button::after {
+      content: '→';
+      position: absolute;
+      right: 2rem;
+      top: 50%;
+      transform: translateY(-50%) translateX(10px);
+      opacity: 0;
+      transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+      font-size: 1.4rem;
+    }
+
+    .cta-button:hover::before {
+      left: 100%;
+    }
+
+    .cta-button:hover::after {
+      right: 1.8rem;
+      opacity: 1;
+      transform: translateY(-50%) translateX(0);
+    }
+
+    .cta-button:hover {
+      transform: translateY(-8px) scale(1.05);
+      box-shadow: 0 20px 80px rgba(255, 20, 147, 0.7),
+                  0 10px 40px rgba(255, 105, 180, 0.5),
+                  0 5px 20px rgba(0, 0, 0, 0.4),
+                  inset 0 1px 0 rgba(255, 255, 255, 0.4);
+      background-position: 100% center;
+      padding-right: 6.5rem;
+      border-color: rgba(255, 255, 255, 0.4);
+    }
+
+    .cta-button:active {
+      transform: translateY(-6px) scale(1.03);
+    }
+
+    /* Stats Bar */
+    .stats-bar {
+      width: 100%;
+      background: linear-gradient(135deg, rgba(255, 105, 180, 0.08), rgba(255, 105, 180, 0.03));
+      border-top: 1px solid rgba(255, 105, 180, 0.3);
+      border-bottom: 1px solid rgba(255, 105, 180, 0.3);
+      padding: 4rem 2rem;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .stats-bar::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: -100%;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(90deg, transparent, rgba(255, 105, 180, 0.1), transparent);
+      animation: statsShine 5s ease-in-out infinite;
+    }
+
+    @keyframes statsShine {
+      0% { left: -100%; }
+      50%, 100% { left: 200%; }
+    }
+
+    .stats-container {
+      max-width: 1200px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 4rem;
+      text-align: center;
+      position: relative;
+      z-index: 1;
+    }
+
+    .stat-item {
+      opacity: 0;
+      transform: translateY(30px);
+      animation: fadeInUp 0.8s ease-out forwards;
+      position: relative;
+      padding: 1.5rem;
+      transition: transform 0.4s ease;
+    }
+
+    .stat-item::before {
+      content: '✦';
+      position: absolute;
+      top: 0;
+      left: 50%;
+      transform: translateX(-50%);
+      font-size: 1.5rem;
+      color: #ff69b4;
+      opacity: 0.4;
+    }
+
+    .stat-item:hover {
+      transform: translateY(-10px);
+    }
+
+    .stat-item:nth-child(1) { animation-delay: 0.1s; }
+    .stat-item:nth-child(2) { animation-delay: 0.2s; }
+    .stat-item:nth-child(3) { animation-delay: 0.3s; }
+    .stat-item:nth-child(4) { animation-delay: 0.4s; }
+
+    .stat-number {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 3.5rem;
+      font-weight: 600;
+      background: linear-gradient(135deg, #ff69b4, #ffb6d9, #ff69b4);
+      background-size: 200% auto;
+      -webkit-background-clip: text;
+      background-clip: text;
+      -webkit-text-fill-color: transparent;
+      margin-bottom: 0.8rem;
+      margin-top: 1rem;
+      animation: shimmer 8s ease-in-out infinite;
+      filter: drop-shadow(0 2px 10px rgba(255, 105, 180, 0.3));
+    }
+
+    .stat-label {
+      font-size: 0.85rem;
+      color: #8b6f47;
+      letter-spacing: 2.5px;
+      text-transform: uppercase;
+      font-weight: 500;
+    }
+
+    /* Story Section */
+    .story-section {
+      width: 100%;
+      background: linear-gradient(135deg, rgba(255, 105, 180, 0.05), rgba(255, 105, 180, 0.02));
+      border-top: 1px solid rgba(255, 105, 180, 0.2);
+      border-bottom: 1px solid rgba(255, 105, 180, 0.2);
+      padding: 6rem 2rem;
+      margin: 4rem 0;
+    }
+
+    .story-container {
+      max-width: 1400px;
+      margin: 0 auto;
+    }
+
+    .story-content {
+      opacity: 0;
+      transform: translateY(40px);
+      animation: fadeInUp 1s ease-out 0.3s forwards;
+    }
+
+    .story-header {
+      text-align: center;
+      margin-bottom: 4rem;
+    }
+
+    .story-label {
+      display: inline-block;
+      font-size: 0.75rem;
+      color: #ff69b4;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      margin-bottom: 1rem;
+      font-weight: 600;
+      padding: 0.5rem 1.5rem;
+      border: 1px solid rgba(255, 105, 180, 0.3);
+      background: rgba(255, 105, 180, 0.05);
+    }
+
+    .story-title {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 3.5rem;
+      font-weight: 300;
+      color: #2d2d2d;
+      letter-spacing: 1px;
+      line-height: 1.3;
+      margin-top: 1rem;
+    }
+
+    .story-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 5rem;
+      margin-bottom: 5rem;
+      align-items: start;
+    }
+
+    .story-text {
+      display: flex;
+      flex-direction: column;
+      gap: 2rem;
+    }
+
+    .story-paragraph {
+      font-size: 1.05rem;
+      line-height: 1.9;
+      color: #5d5d5d;
+      font-weight: 300;
+      text-align: justify;
+      letter-spacing: 0.3px;
+    }
+
+    .story-paragraph:first-letter {
+      font-size: 3.5rem;
+      font-family: 'Cormorant Garamond', serif;
+      float: left;
+      line-height: 0.9;
+      margin: 0.1em 0.1em 0 0;
+      color: #ff69b4;
+    }
+
+    .story-features {
+      display: flex;
+      flex-direction: column;
+      gap: 2rem;
+    }
+
+    .feature-card {
+      background: rgba(255, 255, 255, 0.8);
+      border: 1px solid rgba(255, 105, 180, 0.3);
+      padding: 2.5rem;
+      transition: all 0.4s ease;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .feature-card::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: -100%;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(90deg, transparent, rgba(255, 105, 180, 0.1), transparent);
+      transition: left 0.6s ease;
+    }
+
+    .feature-card:hover::before {
+      left: 100%;
+    }
+
+    .feature-card:hover {
+      transform: translateX(10px);
+      border-color: rgba(255, 105, 180, 0.6);
+      background: rgba(255, 230, 240, 0.9);
+    }
+
+    .feature-icon {
+      font-size: 2.5rem;
+      color: #ff69b4;
+      margin-bottom: 1.5rem;
+      display: block;
+    }
+
+    .feature-title {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.5rem;
+      font-weight: 500;
+      color: #8b6f47;
+      margin-bottom: 1rem;
+      letter-spacing: 0.5px;
+    }
+
+    .feature-description {
+      font-size: 0.95rem;
+      line-height: 1.7;
+      color: #5d5d5d;
+      font-weight: 300;
+    }
+
+    .craftsmanship-stats {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 3rem;
+      padding: 3rem;
+      background: rgba(255, 105, 180, 0.03);
+      border: 1px solid rgba(255, 105, 180, 0.2);
+    }
+
+    .craft-stat {
+      text-align: center;
+      padding: 1.5rem;
+      transition: transform 0.3s ease;
+    }
+
+    .craft-stat:hover {
+      transform: translateY(-5px);
+    }
+
+    .craft-number {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 3rem;
+      font-weight: 600;
+      background: linear-gradient(135deg, #ff69b4, #ffb6d9);
+      -webkit-background-clip: text;
+      background-clip: text;
+      -webkit-text-fill-color: transparent;
+      margin-bottom: 0.8rem;
+    }
+
+    .craft-label {
+      font-size: 0.85rem;
+      color: #8b6f47;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      font-weight: 500;
+    }
+
+    /* Filter Section */
+    .filter-section {
+      max-width: 1600px;
+      margin: 4rem auto;
+      padding: 0 2rem;
+    }
+
+    .filter-controls {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 2rem;
+      align-items: flex-end;
+      padding: 2.5rem;
+      background: rgba(255, 105, 180, 0.03);
+      border: 1px solid rgba(255, 105, 180, 0.15);
+      border-radius: 2px;
+    }
+
+    .filter-group {
+      flex: 1;
+      min-width: 200px;
+    }
+
+    .filter-label {
+      display: block;
+      font-size: 0.75rem;
+      color: #ff69b4;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      margin-bottom: 0.8rem;
+      font-weight: 600;
+    }
+
+    select, input[type="text"] {
+      width: 100%;
+      padding: 1rem 1.5rem;
+      background: rgba(255, 255, 255, 0.9);
+      border: 1px solid rgba(255, 105, 180, 0.3);
+      color: #2d2d2d;
+      font-family: 'Montserrat', sans-serif;
+      font-size: 0.9rem;
+      outline: none;
+      transition: all 0.3s ease;
+    }
+
+    select:focus, input[type="text"]:focus {
+      border-color: #ff69b4;
+      box-shadow: 0 0 0 2px rgba(255, 105, 180, 0.1);
+    }
+
+    select {
+      cursor: pointer;
+      appearance: none;
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 12 12'%3E%3Cpath fill='%23ff69b4' d='M6 9L1 4h10z'/%3E%3C/svg%3E");
+      background-repeat: no-repeat;
+      background-position: right 1rem center;
+      padding-right: 3rem;
+    }
+
+    /* Products Section */
+    .products-section {
+      max-width: 1600px;
+      margin: 5rem auto;
+      padding: 0 2rem;
+    }
+
+    .section-header {
+      text-align: center;
+      margin-bottom: 4rem;
+    }
+
+    .section-title {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 3.5rem;
+      font-weight: 300;
+      letter-spacing: 2px;
+      background: linear-gradient(135deg, #ff69b4, #ffb6d9);
+      -webkit-background-clip: text;
+      background-clip: text;
+      -webkit-text-fill-color: transparent;
+      margin-bottom: 1rem;
+    }
+
+    .section-subtitle {
+      font-size: 1.1rem;
+      color: #8b6f47;
+      letter-spacing: 1.5px;
+    }
+
+    .products-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+      gap: 3rem;
+      margin-bottom: 4rem;
+    }
+
+    .product-card {
+      background: linear-gradient(135deg, rgba(255, 255, 255, 0.98), rgba(255, 230, 240, 0.95));
+      border: 1px solid rgba(255, 105, 180, 0.25);
+      overflow: hidden;
+      cursor: pointer;
+      transition: all 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+      position: relative;
+      opacity: 0;
+      transform: translateY(50px) scale(0.95) rotateX(10deg);
+      animation: cardFadeIn 0.8s ease-out forwards;
+      border-radius: 4px;
+      box-shadow: 0 8px 32px rgba(255, 105, 180, 0.2);
+    }
+
+    @keyframes cardFadeIn {
+      to {
+        opacity: 1;
+        transform: translateY(0) scale(1) rotateX(0deg);
+      }
+    }
+
+    .product-card:nth-child(1) { animation-delay: 0.05s; }
+    .product-card:nth-child(2) { animation-delay: 0.1s; }
+    .product-card:nth-child(3) { animation-delay: 0.15s; }
+    .product-card:nth-child(4) { animation-delay: 0.2s; }
+    .product-card:nth-child(5) { animation-delay: 0.25s; }
+    .product-card:nth-child(6) { animation-delay: 0.3s; }
+    .product-card:nth-child(7) { animation-delay: 0.05s; }
+    .product-card:nth-child(8) { animation-delay: 0.1s; }
+    .product-card:nth-child(9) { animation-delay: 0.15s; }
+    .product-card:nth-child(10) { animation-delay: 0.2s; }
+    .product-card:nth-child(11) { animation-delay: 0.25s; }
+    .product-card:nth-child(12) { animation-delay: 0.3s; }
+
+    .product-card::before {
+      content: '';
+      position: absolute;
+      top: -50%;
+      left: -50%;
+      width: 200%;
+      height: 200%;
+      background: radial-gradient(circle, rgba(255, 105, 180, 0.15), transparent 70%);
+      opacity: 0;
+      transition: opacity 0.6s ease, transform 0.6s ease;
+      z-index: 1;
+      pointer-events: none;
+      transform: scale(0.5);
+    }
+
+    .product-card:hover::before {
+      opacity: 1;
+      transform: scale(1);
+    }
+
+    .product-card::after {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: -100%;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.1), transparent);
+      transition: left 0.8s ease;
+      z-index: 2;
+      pointer-events: none;
+    }
+
+    .product-card:hover::after {
+      left: 100%;
+    }
+
+    .product-card:hover {
+      transform: translateY(-20px) scale(1.03);
+      border-color: rgba(255, 105, 180, 0.6);
+      box-shadow: 0 30px 80px rgba(255, 105, 180, 0.3),
+                  0 0 60px rgba(255, 105, 180, 0.4),
+                  0 0 100px rgba(255, 20, 147, 0.25);
+    }
+
+    .product-image-container {
+      position: relative;
+      width: 100%;
+      height: 420px;
+      overflow: hidden;
+      background: radial-gradient(circle at center, rgba(255, 182, 217, 0.2), rgba(255, 255, 255, 0.5));
+    }
+
+    .product-image-container::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(135deg, rgba(255, 105, 180, 0.1), transparent 50%, rgba(255, 20, 147, 0.1));
+      z-index: 1;
+      opacity: 0.5;
+      transition: opacity 0.5s ease;
+      pointer-events: none;
+    }
+
+    .product-card:hover .product-image-container::before {
+      opacity: 0.8;
+    }
+
+    .product-image {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: transform 0.8s cubic-bezier(0.4, 0, 0.2, 1), filter 0.5s ease;
+      filter: brightness(0.92) contrast(1.05);
+    }
+
+    .product-card:hover .product-image {
+      transform: scale(1.15) rotate(3deg);
+      filter: brightness(1.08) contrast(1.1) saturate(1.1);
+    }
+
+    .product-badge {
+      position: absolute;
+      top: 1.5rem;
+      right: 1.5rem;
+      background: rgba(255, 20, 147, 0.95);
+      color: #ffffff;
+      padding: 0.5rem 1.2rem;
+      font-size: 0.7rem;
+      font-weight: 600;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      z-index: 2;
+    }
+
+    .product-info {
+      padding: 2.5rem;
+      position: relative;
+      z-index: 2;
+    }
+
+    .product-category {
+      font-size: 0.75rem;
+      color: #ff69b4;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      margin-bottom: 1rem;
+      font-weight: 600;
+    }
+
+    .product-name {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.8rem;
+      font-weight: 500;
+      color: #8b6f47;
+      margin-bottom: 1rem;
+      line-height: 1.3;
+    }
+
+    .product-description {
+      font-size: 0.9rem;
+      color: #8b6f47;
+      line-height: 1.7;
+      margin-bottom: 2rem;
+      font-weight: 300;
+    }
+
+    .product-footer {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding-top: 1.5rem;
+      border-top: 1px solid rgba(255, 105, 180, 0.2);
+    }
+
+    .product-price {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 2rem;
+      font-weight: 600;
+      background: linear-gradient(135deg, #ff69b4, #ffb6d9);
+      -webkit-background-clip: text;
+      background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    .product-rating {
+      display: flex;
+      gap: 0.3rem;
+      color: #ff69b4;
+      font-size: 1rem;
+    }
+
+    /* Pagination */
+    .pagination {
+      display: flex;
+      justify-content: center;
+      gap: 1rem;
+      margin: 5rem 0;
+      opacity: 0;
+      transform: translateY(30px);
+      animation: fadeInUp 0.8s ease-out 0.5s forwards;
+    }
+
+    .pagination button {
+      min-width: 45px;
+      padding: 1rem 1.5rem;
+      background: rgba(255, 255, 255, 0.9);
+      border: 1px solid rgba(255, 105, 180, 0.3);
+      color: #2d2d2d;
+      font-family: 'Montserrat', sans-serif;
+      font-size: 0.9rem;
+      font-weight: 500;
+      cursor: pointer;
+      transition: all 0.3s ease;
+    }
+
+    .pagination button:hover:not(:disabled) {
+      background: rgba(255, 105, 180, 0.2);
+      border-color: #ff69b4;
+      transform: translateY(-2px);
+    }
+
+    .pagination button.active {
+      background: linear-gradient(135deg, #ff1493, #ff69b4);
+      color: #ffffff;
+      border-color: #ff69b4;
+      font-weight: 600;
+    }
+
+    .pagination button:disabled {
+      opacity: 0.3;
+      cursor: not-allowed;
+    }
+
+    /* Footer */
+    footer {
+      width: 100%;
+      background: rgba(255, 230, 240, 0.95);
+      border-top: 1px solid rgba(255, 105, 180, 0.3);
+      padding: 3rem 2rem;
+      text-align: center;
+    }
+
+    .footer-content {
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+
+    .footer-text {
+      font-size: 0.85rem;
+      color: #8b6f47;
+      letter-spacing: 1px;
+    }
+
+    /* Loading State */
+    .loading {
+      text-align: center;
+      padding: 5rem 2rem;
+      font-size: 1.2rem;
+      color: #ff69b4;
+    }
+
+    /* Responsive */
+    @media (max-width: 1200px) {
+      .products-grid {
+        grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+        gap: 2rem;
+      }
+    }
+
+    @media (max-width: 768px) {
+      header {
+        padding: 1rem 2rem;
+      }
+
+      .nav-links {
+        display: none;
+      }
+
+      .hero-title {
+        font-size: 3rem;
+      }
+
+      .hero-subtitle {
+        font-size: 1rem;
+      }
+
+      .stats-container {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 2rem;
+      }
+
+      .story-section {
+        padding: 4rem 1.5rem;
+      }
+
+      .story-title {
+        font-size: 2.5rem;
+      }
+
+      .story-grid {
+        grid-template-columns: 1fr;
+        gap: 3rem;
+      }
+
+      .story-paragraph {
+        font-size: 1rem;
+        text-align: left;
+      }
+
+      .craftsmanship-stats {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 2rem;
+        padding: 2rem;
+      }
+
+      .craft-number {
+        font-size: 2.5rem;
+      }
+
+      .filter-controls {
+        flex-direction: column;
+        gap: 1.5rem;
+      }
+
+      .products-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .section-title {
+        font-size: 2.5rem;
+      }
+    }
+  </style>
+  <style>@view-transition { navigation: auto; }</style>
+  <script src="/_sdk/data_sdk.js" type="text/javascript"></script>
+  <script src="https://cdn.tailwindcss.com" type="text/javascript"></script>
+ </head>
+ <body>
+  <div class="bg-gradient"></div>
+  <div class="bg-pattern"></div><!-- Header -->
+  <header id="header">
+   <nav><a href="#" class="logo" id="site-title">Trends by Kavya </a>
+    <ul class="nav-links">
+     <li><a href="#home">Home</a></li>
+     <li><a href="#collection">Collection</a></li>
+     <li><a href="#about">About</a></li>
+     <li><a href="#contact">Contact</a></li>
+    </ul>
+   </nav>
+  </header><!-- Hero Section -->
+  <section class="hero" id="home">
+   <video class="hero-video" autoplay muted loop>
+    <source src="heroVideo.mp4" type="video/mp4">
+   </video>
+   <div class="hero-content">
+    <div style="position: relative; display: inline-block; margin-bottom: 2rem;">
+     <svg width="80" height="80" viewbox="0 0 80 80" style="opacity: 0.7; animation: fadeInUp 1s ease-out 0.2s both, rotateStar 20s linear infinite;"><defs>
+       <lineargradient id="starGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+        <stop offset="0%" style="stop-color:#ff69b4;stop-opacity:1" />
+        <stop offset="50%" style="stop-color:#ff1493;stop-opacity:1" />
+        <stop offset="100%" style="stop-color:#ff69b4;stop-opacity:1" />
+       </lineargradient>
+      </defs> <polygon points="40,8 46,28 66,28 50,40 56,60 40,48 24,60 30,40 14,28 34,28" fill="none" stroke="url(#starGradient)" stroke-width="2" /> <circle cx="40" cy="40" r="3" fill="#ff69b4" opacity="0.8">
+       <animate attributename="opacity" values="0.5;1;0.5" dur="2s" repeatcount="indefinite" />
+      </circle>
+     </svg>
+    </div>
+    <style>
+        @keyframes rotateStar {
+          from { transform: rotate(0deg); }
+          to { transform: rotate(360deg); }
+        }
+      </style>
+    <h1 class="hero-title" id="hero-headline">Timeless Elegance in Every Detail</h1>
+    <p class="hero-subtitle" id="hero-subtext">Handcrafted luxury jewelry since 1850</p><a href="#collection" class="cta-button" id="cta-button">Explore Collection</a>
+    <div style="margin-top: 3rem; opacity: 0; animation: fadeInUp 1.2s ease-out 0.8s both;">
+     <p style="font-size: 0.75rem; letter-spacing: 3px; color: rgba(255, 105, 180, 0.6); text-transform: uppercase; font-weight: 500;">�� Free Worldwide Shipping ✦ Lifetime Guarantee ✦</p>
+    </div>
+   </div>
+  </section><!-- Stats Bar -->
+  <div class="stats-bar">
+   <div class="stats-container">
+    <div class="stat-item">
+     <div class="stat-number">
+      100+
+     </div>
+     <div class="stat-label">
+      Exquisite Pieces
+     </div>
+    </div>
+    <div class="stat-item">
+     <div class="stat-number">
+      170+
+     </div>
+     <div class="stat-label">
+      Years Heritage
+     </div>
+    </div>
+    <div class="stat-item">
+     <div class="stat-number">
+      50K+
+     </div>
+     <div class="stat-label">
+      Happy Clients
+     </div>
+    </div>
+    <div class="stat-item">
+     <div class="stat-number">
+      98%
+     </div>
+     <div class="stat-label">
+      Satisfaction
+     </div>
+    </div>
+   </div>
+  </div><!-- Story Section -->
+  <section class="story-section">
+   <div class="story-container">
+    <div class="story-content">
+     <div class="story-header"><span class="story-label">Our Heritage</span>
+      <h2 class="story-title">The Art of Handcrafted Excellence</h2>
+     </div>
+     <div class="story-grid">
+      <div class="story-text">
+       <p class="story-paragraph">For over 170 years, our master artisans have been crafting jewelry that tells stories. Each piece begins its journey in the skilled hands of craftsmen who have inherited techniques passed down through five generations. The ancient art of hand-forging, stone-setting, and finishing is preserved in every creation.</p>
+       <p class="story-paragraph">In our atelier, time moves differently. A single ring may take weeks to perfect, with every curve hammered by hand, every stone individually selected and set with precision that only human touch can achieve. This is not mass production—this is poetry in precious metals.</p>
+       <p class="story-paragraph">Our craftsmen source the finest materials from ethical mines around the world. Each diamond is hand-selected for its brilliance, each gold ingot tested for purity. The marriage of traditional tools and modern ethics creates jewelry that carries both beauty and conscience.</p>
+      </div>
+      <div class="story-features">
+       <div class="feature-card">
+        <div class="feature-icon">
+         ✦
+        </div>
+        <h3 class="feature-title">Hand-Forged Metals</h3>
+        <p class="feature-description">Every piece is shaped using traditional hammering and forging techniques, creating unique textures that machines cannot replicate.</p>
+       </div>
+       <div class="feature-card">
+        <div class="feature-icon">
+         ◈
+        </div>
+        <h3 class="feature-title">Master Stone Setting</h3>
+        <p class="feature-description">Our setters have trained for decades to achieve the perfect placement, ensuring each gemstone catches light from every angle.</p>
+       </div>
+       <div class="feature-card">
+        <div class="feature-icon">
+         ❖
+        </div>
+        <h3 class="feature-title">Ancient Finishing</h3>
+        <p class="feature-description">Hand-polishing and patina techniques from the 19th century give each piece its signature luster and character.</p>
+       </div>
+      </div>
+     </div>
+     <div class="craftsmanship-stats">
+      <div class="craft-stat">
+       <div class="craft-number">
+        500+
+       </div>
+       <div class="craft-label">
+        Hours Per Masterpiece
+       </div>
+      </div>
+      <div class="craft-stat">
+       <div class="craft-number">
+        15
+       </div>
+       <div class="craft-label">
+        Master Artisans
+       </div>
+      </div>
+      <div class="craft-stat">
+       <div class="craft-number">
+        5
+       </div>
+       <div class="craft-label">
+        Generations of Craft
+       </div>
+      </div>
+      <div class="craft-stat">
+       <div class="craft-number">
+        100%
+       </div>
+       <div class="craft-label">
+        Handcrafted
+       </div>
+      </div>
+     </div>
+    </div>
+   </div>
+  </section><!-- Filter Section -->
+  <section class="filter-section" id="collection">
+   <div class="filter-controls">
+    <div class="filter-group"><label for="category-filter" class="filter-label">Category</label> <select id="category-filter"> <option value="all">All Categories</option> <option value="rings">Rings</option> <option value="necklaces">Necklaces</option> <option value="earrings">Earrings</option> <option value="bracelets">Bracelets</option> <option value="watches">Watches</option> </select>
+    </div>
+    <div class="filter-group"><label for="search-input" class="filter-label">Search</label> <input type="text" id="search-input" placeholder="Search jewelry...">
+    </div>
+   </div>
+  </section><!-- Products Section -->
+  <section class="products-section">
+   <div class="section-header">
+    <h2 class="section-title">Our Collection</h2>
+    <p class="section-subtitle">Discover masterpieces crafted with passion and precision</p>
+   </div>
+   <div class="products-grid" id="products-grid"></div>
+   <div class="pagination" id="pagination"></div>
+  </section><!-- Footer -->
+  <footer>
+   <div class="footer-content">
+    <p class="footer-text" id="footer-text">© 2025 Trends by Kavya. All rights reserved.</p>
+   </div>
+  </footer>
+  <script>
+    const defaultConfig = {
+      site_title: "Trends by Kavya",
+      hero_headline: "Timeless Elegance in Every Detail",
+      hero_subtext: "Handcrafted luxury jewelry since 1850",
+      cta_button: "Explore Collection",
+      footer_text: "© 2025 Trends by Kavya. All rights reserved.",
+      background_color: "#ffffff",
+      surface_color: "#ffe6f0",
+      text_color: "#2d2d2d",
+      accent_color: "#ff69b4",
+      button_color: "#ff1493",
+      font_family: "Montserrat",
+      font_size: 16
+    };
+
+    // Jewelry images from professional collections
+    const jewelryImages = [
+      'https://images.unsplash.com/photo-1515562141207-7a88fb7ce338?w=800&q=80',
+      'https://images.unsplash.com/photo-1611591437281-460bfbe1220a?w=800&q=80',
+      'https://images.unsplash.com/photo-1535632066927-ab7c9ab60908?w=800&q=80',
+      'https://images.unsplash.com/photo-1573408301185-9146fe634ad0?w=800&q=80',
+      'https://images.unsplash.com/photo-1523170335258-f5ed11844a49?w=800&q=80',
+      'https://images.unsplash.com/photo-1605100804763-247f67b3557e?w=800&q=80',
+      'https://images.unsplash.com/photo-1599643478518-a784e5dc4c8f?w=800&q=80',
+      'https://images.unsplash.com/photo-1506630448388-4e683c67ddb0?w=800&q=80',
+      'https://images.unsplash.com/photo-1601121141461-9d6647bca1ed?w=800&q=80',
+      'https://images.unsplash.com/photo-1614252235316-8c857d38b5f4?w=800&q=80',
+      'https://images.unsplash.com/photo-1603561591411-07134e71a2a9?w=800&q=80',
+      'https://images.unsplash.com/photo-1517686748516-4b66a92d0710?w=800&q=80',
+      'https://images.unsplash.com/photo-1608042314453-ae338d80c427?w=800&q=80',
+      'https://images.unsplash.com/photo-1612534847738-48fea379383c?w=800&q=80',
+      'https://images.unsplash.com/photo-1611085583191-a3b181a88401?w=800&q=80',
+      'https://images.unsplash.com/photo-1603561596112-0a132b757442?w=800&q=80',
+      'https://images.unsplash.com/photo-1543294001-f7cd5d7fb516?w=800&q=80',
+      'https://images.unsplash.com/photo-1630019852942-f89202989a59?w=800&q=80',
+      'https://images.unsplash.com/photo-1588444650700-e24acd79e5bc?w=800&q=80',
+      'https://images.unsplash.com/photo-1602173574767-37ac01994b2a?w=800&q=80'
+    ];
+
+    // Generate 100 products
+    const categories = ['rings', 'necklaces', 'earrings', 'bracelets', 'watches'];
+    const materials = ['gold', 'platinum', 'silver', 'diamond'];
+    const gemstones = ['Diamond', 'Ruby', 'Sapphire', 'Emerald', 'Pearl', 'Topaz', 'Amethyst'];
+    
+    const productNames = {
+      rings: ['Eternity Ring', 'Solitaire Ring', 'Cocktail Ring', 'Band Ring', 'Statement Ring'],
+      necklaces: ['Pendant Necklace', 'Choker', 'Opera Necklace', 'Princess Necklace', 'Collar Necklace'],
+      earrings: ['Stud Earrings', 'Drop Earrings', 'Hoop Earrings', 'Chandelier Earrings', 'Cluster Earrings'],
+      bracelets: ['Tennis Bracelet', 'Bangle', 'Charm Bracelet', 'Cuff Bracelet', 'Chain Bracelet'],
+      watches: ['Classic Watch', 'Luxury Timepiece', 'Dress Watch', 'Diamond Watch', 'Elegant Watch']
+    };
+
+    const products = Array.from({ length: 100 }, (_, i) => {
+      const category = categories[i % categories.length];
+      const material = materials[Math.floor(Math.random() * materials.length)];
+      const gemstone = gemstones[Math.floor(Math.random() * gemstones.length)];
+      const baseName = productNames[category][i % productNames[category].length];
+      const price = Math.floor(Math.random() * 95000) + 5000;
+      const rating = (Math.random() * 1.5 + 3.5).toFixed(1);
+      
+      return {
+        id: i + 1,
+        name: `${gemstone} ${baseName}`,
+        category: category,
+        material: material,
+        description: `Exquisite ${material} ${category.slice(0, -1)} featuring premium ${gemstone.toLowerCase()} gemstones. Handcrafted by master artisans.`,
+        price: price,
+        rating: parseFloat(rating),
+        image: jewelryImages[i % jewelryImages.length],
+        featured: i < 8,
+        badge: i < 5 ? 'NEW' : (i < 15 ? 'BESTSELLER' : '')
+      };
+    });
+
+    // State
+    let currentPage = 1;
+    const itemsPerPage = 12;
+    let filteredProducts = [...products];
+
+    // Filter functions
+    function filterProducts() {
+      const category = document.getElementById('category-filter').value;
+      const searchTerm = document.getElementById('search-input').value.toLowerCase();
+      
+      filteredProducts = products.filter(product => {
+        const matchesCategory = category === 'all' || product.category === category;
+        const matchesSearch = product.name.toLowerCase().includes(searchTerm) || 
+                            product.description.toLowerCase().includes(searchTerm);
+        
+        return matchesCategory && matchesSearch;
+      });
+
+      currentPage = 1;
+      renderProducts();
+      renderPagination();
+    }
+
+    // Render products
+    function renderProducts() {
+      const grid = document.getElementById('products-grid');
+      const startIndex = (currentPage - 1) * itemsPerPage;
+      const endIndex = startIndex + itemsPerPage;
+      const pageProducts = filteredProducts.slice(startIndex, endIndex);
+
+      if (pageProducts.length === 0) {
+        grid.innerHTML = '<div class="loading">No products found matching your criteria</div>';
+        return;
+      }
+
+      grid.innerHTML = pageProducts.map(product => `
+        <div class="product-card">
+          <div class="product-image-container">
+            <img src="${product.image}" 
+                 alt="${product.name}" 
+                 class="product-image"
+                 onerror="this.style.display='none';">
+            ${product.badge ? `<div class="product-badge">${product.badge}</div>` : ''}
+          </div>
+          <div class="product-info">
+            <div class="product-category">${product.category.toUpperCase()}</div>
+            <h3 class="product-name">${product.name}</h3>
+            <p class="product-description">${product.description}</p>
+            <div class="product-footer">
+              <div class="product-price">$${product.price.toLocaleString()}</div>
+              <div class="product-rating">
+                ${'★'.repeat(Math.floor(product.rating))}${'☆'.repeat(5 - Math.floor(product.rating))}
+              </div>
+            </div>
+          </div>
+        </div>
+      `).join('');
+    }
+
+    // Render pagination
+    function renderPagination() {
+      const pagination = document.getElementById('pagination');
+      const totalPages = Math.ceil(filteredProducts.length / itemsPerPage);
+
+      if (totalPages <= 1) {
+        pagination.innerHTML = '';
+        return;
+      }
+
+      let buttons = [];
+      
+      buttons.push(`<button onclick="changePage(${currentPage - 1})" ${currentPage === 1 ? 'disabled' : ''}>��� Previous</button>`);
+      
+      for (let i = 1; i <= Math.min(totalPages, 5); i++) {
+        buttons.push(`<button onclick="changePage(${i})" class="${currentPage === i ? 'active' : ''}">${i}</button>`);
+      }
+      
+      if (totalPages > 5) {
+        buttons.push(`<button disabled>...</button>`);
+        buttons.push(`<button onclick="changePage(${totalPages})" class="${currentPage === totalPages ? 'active' : ''}">${totalPages}</button>`);
+      }
+      
+      buttons.push(`<button onclick="changePage(${currentPage + 1})" ${currentPage === totalPages ? 'disabled' : ''}>Next →</button>`);
+
+      pagination.innerHTML = buttons.join('');
+    }
+
+    function changePage(page) {
+      const totalPages = Math.ceil(filteredProducts.length / itemsPerPage);
+      if (page < 1 || page > totalPages) return;
+      
+      const grid = document.getElementById('products-grid');
+      grid.style.opacity = '0';
+      grid.style.transform = 'translateY(30px)';
+      
+      setTimeout(() => {
+        currentPage = page;
+        renderProducts();
+        renderPagination();
+        
+        setTimeout(() => {
+          grid.style.transition = 'opacity 0.5s ease, transform 0.5s ease';
+          grid.style.opacity = '1';
+          grid.style.transform = 'translateY(0)';
+        }, 50);
+        
+        document.getElementById('collection').scrollIntoView({ behavior: 'smooth' });
+      }, 300);
+    }
+
+    // Event listeners
+    document.getElementById('category-filter').addEventListener('change', filterProducts);
+    document.getElementById('search-input').addEventListener('input', filterProducts);
+
+    // Header scroll effect
+    window.addEventListener('scroll', () => {
+      const header = document.getElementById('header');
+      if (window.scrollY > 100) {
+        header.classList.add('scrolled');
+      } else {
+        header.classList.remove('scrolled');
+      }
+    });
+
+    // Element SDK Integration
+    async function onConfigChange(config) {
+      const customFont = config.font_family || defaultConfig.font_family;
+      const baseFontStack = 'Montserrat, sans-serif';
+      const baseSize = config.font_size || defaultConfig.font_size;
+
+      // Update text content
+      document.getElementById('site-title').textContent = config.site_title || defaultConfig.site_title;
+      document.getElementById('hero-headline').textContent = config.hero_headline || defaultConfig.hero_headline;
+      document.getElementById('hero-subtext').textContent = config.hero_subtext || defaultConfig.hero_subtext;
+      document.getElementById('cta-button').textContent = config.cta_button || defaultConfig.cta_button;
+      document.getElementById('footer-text').textContent = config.footer_text || defaultConfig.footer_text;
+
+      // Update colors
+      const bgColor = config.background_color || defaultConfig.background_color;
+      const surfaceColor = config.surface_color || defaultConfig.surface_color;
+      const textColor = config.text_color || defaultConfig.text_color;
+      const accentColor = config.accent_color || defaultConfig.accent_color;
+      const buttonColor = config.button_color || defaultConfig.button_color;
+
+      document.body.style.background = bgColor;
+      document.body.style.color = textColor;
+
+      // Update fonts
+      document.body.style.fontFamily = `${customFont}, ${baseFontStack}`;
+      
+      // Update font sizes
+      const heroTitle = document.querySelector('.hero-title');
+      if (heroTitle) heroTitle.style.fontSize = `${baseSize * 3.125}px`;
+      
+      const heroSubtitle = document.querySelector('.hero-subtitle');
+      if (heroSubtitle) heroSubtitle.style.fontSize = `${baseSize * 1.0625}px`;
+      
+      const sectionTitle = document.querySelector('.section-title');
+      if (sectionTitle) sectionTitle.style.fontSize = `${baseSize * 2.1875}px`;
+      
+      document.body.style.fontSize = `${baseSize}px`;
+    }
+
+    if (window.elementSdk) {
+      window.elementSdk.init({
+        defaultConfig: defaultConfig,
+        onConfigChange: onConfigChange,
+        mapToCapabilities: (config) => ({
+          recolorables: [
+            {
+              get: () => config.background_color || defaultConfig.background_color,
+              set: (value) => {
+                config.background_color = value;
+                window.elementSdk.setConfig({ background_color: value });
+              }
+            },
+            {
+              get: () => config.surface_color || defaultConfig.surface_color,
+              set: (value) => {
+                config.surface_color = value;
+                window.elementSdk.setConfig({ surface_color: value });
+              }
+            },
+            {
+              get: () => config.text_color || defaultConfig.text_color,
+              set: (value) => {
+                config.text_color = value;
+                window.elementSdk.setConfig({ text_color: value });
+              }
+            },
+            {
+              get: () => config.accent_color || defaultConfig.accent_color,
+              set: (value) => {
+                config.accent_color = value;
+                window.elementSdk.setConfig({ accent_color: value });
+              }
+            },
+            {
+              get: () => config.button_color || defaultConfig.button_color,
+              set: (value) => {
+                config.button_color = value;
+                window.elementSdk.setConfig({ button_color: value });
+              }
+            }
+          ],
+          borderables: [],
+          fontEditable: {
+            get: () => config.font_family || defaultConfig.font_family,
+            set: (value) => {
+              config.font_family = value;
+              window.elementSdk.setConfig({ font_family: value });
+            }
+          },
+          fontSizeable: {
+            get: () => config.font_size || defaultConfig.font_size,
+            set: (value) => {
+              config.font_size = value;
+              window.elementSdk.setConfig({ font_size: value });
+            }
+          }
+        }),
+        mapToEditPanelValues: (config) => new Map([
+          ["site_title", config.site_title || defaultConfig.site_title],
+          ["hero_headline", config.hero_headline || defaultConfig.hero_headline],
+          ["hero_subtext", config.hero_subtext || defaultConfig.hero_subtext],
+          ["cta_button", config.cta_button || defaultConfig.cta_button],
+          ["footer_text", config.footer_text || defaultConfig.footer_text]
+        ])
+      });
+    }
+
+    // Add accent gems to the necklace
+    function createJewelry() {
+      const ringBand = document.querySelector('.ring-band');
+      const numberOfGems = 32; // Accent gems along the necklace chain
+      
+      for (let i = 0; i < numberOfGems; i++) {
+        const angle = (360 / numberOfGems) * i;
+        const gem = document.createElement('div');
+        gem.className = 'accent-gem';
+        gem.style.position = 'absolute';
+        gem.style.top = '50%';
+        gem.style.left = '50%';
+        
+        // Calculate elliptical position for necklace shape
+        const radiusX = 190;
+        const radiusY = 140;
+        const radians = (angle * Math.PI) / 180;
+        const x = Math.cos(radians) * radiusX;
+        const y = Math.sin(radians) * radiusY;
+        
+        gem.style.transform = `translate(calc(-50% + ${x}px), calc(-50% + ${y}px))`;
+        gem.style.animationDelay = `${i * 0.04}s`;
+        ringBand.appendChild(gem);
+      }
+    }
+
+    // Initialize
+    createJewelry();
+    renderProducts();
+    renderPagination();
+  </script>
+ <script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'9a712b35b71b54b4',t:'MTc2NDU3NzI2My4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
+</html>
